@@ -80,7 +80,7 @@ Data lives in `data/<district>/` locally and is shared with the team via a OneDr
 
 
 
-## **What's NOT done yet (being upfront about this)**
+## **What's NOT done yet**
 
 
 
