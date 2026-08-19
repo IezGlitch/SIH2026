@@ -6,7 +6,7 @@ This covers my part of SOAIDEATHON-S6: fetching raw Sentinel-1, Sentinel-2, and 
 
 
 
-##**What I built**
+## **What I built**
 
 
 
@@ -24,7 +24,7 @@ An end-to-end pipeline that:
 
 
 
-## ** Target districts**
+## **Target districts**
 
 
 
@@ -40,7 +40,7 @@ I picked 3 Bihar districts, each maximizing a different hazard, so our demo show
 
 
 
-##** Data collected so far**
+## **Data collected so far**
 
 
 
@@ -52,7 +52,7 @@ Data lives in `data/<district>/` locally and is shared with the team via a OneDr
 
 
 
-## ** Scripts (in order of how they were built)**
+## **Scripts (in order of how they were built)**
 
 
 
@@ -94,7 +94,7 @@ Data lives in `data/<district>/` locally and is shared with the team via a OneDr
 
 
 
-## ** What I'm doing next**
+## **What I'm doing next**
 
 
 
