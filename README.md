@@ -32,11 +32,11 @@ I picked 3 Bihar districts, each maximizing a different hazard, so our demo show
 
 
 
-\- \*\*Flood — Katihar\*\*: 2026-06-25 to 2026-07-10 (Ganga-Koshi flooding)
+\- **Flood — Katihar**: 2026-06-25 to 2026-07-10 (Ganga-Koshi flooding)
 
-\- \*\*Heatwave — Gaya\*\*: 2026-05-10 to 2026-05-25 (peak 44.6C on May 18)
+\- **Heatwave — Gaya**: 2026-05-10 to 2026-05-25 (peak 44.6C on May 18)
 
-\- \*\*Crop stress — Begusarai\*\*: 2026-07-01 to 2026-07-15 (46% rainfall deficit, kharif drought)
+\- **Crop stress — Begusarai**: 2026-07-01 to 2026-07-15 (46% rainfall deficit, kharif drought)
 
 
 
