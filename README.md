@@ -56,27 +56,27 @@ Data lives in `data/<district>/` locally and is shared with the team via a OneDr
 
 
 
-\- `filter\_districts.py` — Filters GADM's all-India district file down to Katihar, Gaya, Begusarai, producing `target\_districts.geojson`
+\- `filter_districts.py` — Filters GADM's all-India district file down to Katihar, Gaya, Begusarai, producing `target_districts.geojson`
 
-\- `find\_one\_product.py` — First working test, searches CDSE for one Sentinel-1 product over Katihar
+\- `find_one_product.py` — First working test, searches CDSE for one Sentinel-1 product over Katihar
 
-\- `search\_katihar.py` — Searches Sentinel-1 products over Katihar (test point, then bounding box)
+\- `search_katihar.py` — Searches Sentinel-1 products over Katihar (test point, then bounding box)
 
-\- `search\_all\_districts.py` — Extended search across all 3 districts and all 3 Sentinel missions
+\- `search_all_districts.py` — Extended search across all 3 districts and all 3 Sentinel missions
 
-\- `plan\_downloads.py` — Dry-run, shows what would download and the total size before committing to it
+\- `plan_downloads.py` — Dry-run, shows what would download and the total size before committing to it
 
-\- `get\_katihar\_ids.py` — Fetches Sentinel-2/3 product IDs for Katihar
+\- `get_katihar_ids.py` — Fetches Sentinel-2/3 product IDs for Katihar
 
-\- `get\_gaya\_begusarai\_ids.py` — Fetches Sentinel-1/2/3 product IDs for Gaya and Begusarai
+\- `get_gaya_begusarai_ids.py` — Fetches Sentinel-1/2/3 product IDs for Gaya and Begusarai
 
-\- `download\_one.py` — Downloads Katihar's Sentinel-1 file, first successful real download
+\- `download_one.py` — Downloads Katihar's Sentinel-1 file, first successful real download
 
-\- `download\_katihar\_s2\_s3.py` — Downloads Katihar's Sentinel-2 and Sentinel-3 files
+\- `download_katihar_s2_s3.py` — Downloads Katihar's Sentinel-2 and Sentinel-3 files
 
-\- `download\_gaya.py` — Downloads all 3 Sentinel files for Gaya
+\- `download_gaya.py` — Downloads all 3 Sentinel files for Gaya
 
-\- `download\_begusarai\_retry.py` — Downloads all 3 Sentinel files for Begusarai, with retry and resume logic since the connection kept dropping on large files
+\- `download_begusarai_retry.py` — Downloads all 3 Sentinel files for Begusarai, with retry and resume logic since the connection kept dropping on large files
 
 
 
