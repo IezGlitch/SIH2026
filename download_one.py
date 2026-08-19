@@ -7,7 +7,9 @@ CDSE_USERNAME = os.getenv("CDSE_USERNAME")
 CDSE_PASSWORD = os.getenv("CDSE_PASSWORD")
 
 PRODUCT_ID = "e29ea85c-6cdf-4fe9-98c5-c9d062e7cbb7"
-OUTPUT_FILE = "katihar_sentinel1_sample.zip"
+OUTPUT_FILE = "data/katihar/katihar_sentinel1_sample.zip"
+
+os.makedirs("data/katihar", exist_ok=True)
 
 token_url = "https://identity.dataspace.copernicus.eu/auth/realms/CDSE/protocol/openid-connect/token"
 token_response = requests.post(token_url, data={

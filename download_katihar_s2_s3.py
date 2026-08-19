@@ -6,6 +6,8 @@ load_dotenv()
 CDSE_USERNAME = os.getenv("CDSE_USERNAME")
 CDSE_PASSWORD = os.getenv("CDSE_PASSWORD")
 
+os.makedirs("data/katihar", exist_ok=True)
+
 def get_token():
     token_url = "https://identity.dataspace.copernicus.eu/auth/realms/CDSE/protocol/openid-connect/token"
     r = requests.post(token_url, data={
@@ -20,12 +22,12 @@ products = [
     {
         "id": "11abfdbb-c7ac-483c-8e14-f69b827e8f0b",
         "name": "S2C_MSIL2A_20260707T043701_N0512_R033_T45RWJ_20260707T090407.SAFE",
-        "output": "katihar_sentinel2_sample.zip"
+        "output": "data/katihar/katihar_sentinel2_sample.zip"
     },
     {
         "id": "bb918dcf-156e-47b7-b396-a00c1091c554",
         "name": "S3A_SL_1_RBT____20260709T155342...SEN3",
-        "output": "katihar_sentinel3_sample.zip"
+        "output": "data/katihar/katihar_sentinel3_sample.zip"
     }
 ]
 

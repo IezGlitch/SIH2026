@@ -6,6 +6,8 @@ load_dotenv()
 CDSE_USERNAME = os.getenv("CDSE_USERNAME")
 CDSE_PASSWORD = os.getenv("CDSE_PASSWORD")
 
+os.makedirs("data/gaya", exist_ok=True)
+
 def get_token():
     token_url = "https://identity.dataspace.copernicus.eu/auth/realms/CDSE/protocol/openid-connect/token"
     r = requests.post(token_url, data={
@@ -17,9 +19,9 @@ def get_token():
     return r.json()["access_token"]
 
 products = [
-    {"id": "30436122-737d-46ce-9598-53f9c144cdba", "output": "gaya_sentinel1_sample.zip"},
-    {"id": "039e5da1-c4af-4594-bffa-87def3da3a6d", "output": "gaya_sentinel2_sample.zip"},
-    {"id": "3c65a86b-0aa0-4b48-a36a-cf8f41dac2ae", "output": "gaya_sentinel3_sample.zip"},
+    {"id": "30436122-737d-46ce-9598-53f9c144cdba", "output": "data/gaya/gaya_sentinel1_sample.zip"},
+    {"id": "039e5da1-c4af-4594-bffa-87def3da3a6d", "output": "data/gaya/gaya_sentinel2_sample.zip"},
+    {"id": "3c65a86b-0aa0-4b48-a36a-cf8f41dac2ae", "output": "data/gaya/gaya_sentinel3_sample.zip"},
 ]
 
 token = get_token()

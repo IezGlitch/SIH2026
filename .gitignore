@@ -1,17 +1,5 @@
 .env
-*.zip
-*.SAFE/
 data/
-*_sample/
-katihar_sentinel1_sample/
-katihar_sentinel2_sample/
-katihar_sentinel3_sample/
-gaya_sentinel1_sample/
-gaya_sentinel2_sample/
-gaya_sentinel3_sample/
-begusarai_sentinel1_sample/
-begusarai_sentinel2_sample/
-begusarai_sentinel3_sample/
 target_districts.geojson
 gadm41_IND_2.json
 desktop.ini

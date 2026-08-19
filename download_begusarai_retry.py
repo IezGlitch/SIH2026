@@ -7,6 +7,8 @@ load_dotenv()
 CDSE_USERNAME = os.getenv("CDSE_USERNAME")
 CDSE_PASSWORD = os.getenv("CDSE_PASSWORD")
 
+os.makedirs("data/begusarai", exist_ok=True)
+
 def get_token():
     token_url = "https://identity.dataspace.copernicus.eu/auth/realms/CDSE/protocol/openid-connect/token"
     r = requests.post(token_url, data={
@@ -18,9 +20,9 @@ def get_token():
     return r.json()["access_token"]
 
 products = [
-    {"id": "b38f34a6-5373-49a9-86b0-95ea3d345a8c", "output": "begusarai_sentinel1_sample.zip"},
-    {"id": "39c26947-49d0-4a25-8f86-04f24eadb6ac", "output": "begusarai_sentinel2_sample.zip"},
-    {"id": "fc039df2-a0c6-4e3b-bc28-df5b52b23f95", "output": "begusarai_sentinel3_sample.zip"},
+    {"id": "b38f34a6-5373-49a9-86b0-95ea3d345a8c", "output": "data/begusarai/begusarai_sentinel1_sample.zip"},
+    {"id": "39c26947-49d0-4a25-8f86-04f24eadb6ac", "output": "data/begusarai/begusarai_sentinel2_sample.zip"},
+    {"id": "fc039df2-a0c6-4e3b-bc28-df5b52b23f95", "output": "data/begusarai/begusarai_sentinel3_sample.zip"},
 ]
 
 def download_resumable(product, max_retries=8):

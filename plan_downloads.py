@@ -34,7 +34,9 @@ def get_token():
 search_url = "https://catalogue.dataspace.copernicus.eu/odata/v1/Products"
 token = get_token()
 
-os.makedirs("data", exist_ok=True)
+for d in ["katihar", "gaya", "begusarai"]:
+    os.makedirs(f"data/{d}", exist_ok=True)
+
 plan = []
 
 for district, (start, end) in districts.items():
