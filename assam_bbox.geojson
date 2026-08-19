@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Assam Flood Monitoring Area"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [89.8, 25.5],
+            [96.0, 25.5],
+            [96.0, 28.2],
+            [89.8, 28.2],
+            [89.8, 25.5]
+          ]
+        ]
+      }
+    }
+  ]
+}

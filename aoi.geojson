@@ -1,0 +1,176 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    94.15742,
+                    26.980223
+                ]
+            },
+            "bbox": [
+                94.15742,
+                26.980223,
+                94.15742,
+                26.980223
+            ],
+            "properties": {
+                "label": "Majuli - Assam, India"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    94.55966,
+                    27.472984
+                ]
+            },
+            "bbox": [
+                94.55966,
+                27.472984,
+                94.55966,
+                27.472984
+            ],
+            "properties": {
+                "label": "Dhemaji - Assam, India"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    91.0058,
+                    26.329327
+                ]
+            },
+            "bbox": [
+                91.0058,
+                26.329327,
+                91.0058,
+                26.329327
+            ],
+            "properties": {
+                "label": "Barpeta - Assam, India"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    83.15123,
+                    20.290102
+                ]
+            },
+            "bbox": [
+                83.15123,
+                20.290102,
+                83.15123,
+                20.290102
+            ],
+            "properties": {
+                "label": "Titlagarh - Odisha, India"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    83.909935,
+                    20.84532
+                ]
+            },
+            "bbox": [
+                83.909935,
+                20.84532,
+                83.909935,
+                20.84532
+            ],
+            "properties": {
+                "label": "Sonepur - Odisha, India"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    84.02427,
+                    21.86507
+                ]
+            },
+            "bbox": [
+                84.02427,
+                21.86507,
+                84.02427,
+                21.86507
+            ],
+            "properties": {
+                "label": "Jharsuguda - Odisha, India"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    76.56291,
+                    18.396654
+                ]
+            },
+            "bbox": [
+                76.56291,
+                18.396654,
+                76.56291,
+                18.396654
+            ],
+            "properties": {
+                "label": "Latur - Maharashtra, India"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    76.04205,
+                    18.18545
+                ]
+            },
+            "bbox": [
+                76.04205,
+                18.18545,
+                76.04205,
+                18.18545
+            ],
+            "properties": {
+                "label": "Osmanabad Taluka - Maharashtra, India"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    75.75576,
+                    18.98961
+                ]
+            },
+            "bbox": [
+                75.75576,
+                18.98961,
+                75.75576,
+                18.98961
+            ],
+            "properties": {
+                "label": "Beed - Maharashtra, India"
+            }
+        }
+    ]
+}
