@@ -106,3 +106,8 @@ Data lives in `data/<district>/` locally and is shared with the team via a OneDr
 
 4\. Confirm with Supriya that the Sentinel-3 product type I picked works for her LST calculations
 
+## **Accessing the data**
+
+The actual satellite imagery (~6.75 GB, 9 folders) is NOT in this repo — GitHub can't host files this large. It's shared via OneDrive instead: https://1drv.ms/f/c/a0976f237df6e1f7/IgBV0f4ezwv2RaFitZbJaFQ7AUCimqKt1HwKjNP0oFTyGqg?e=GSvSfk
+
+These are already-extracted Sentinel `.SAFE` products — no need to unzip anything, just open the relevant folder and start working with the raw files inside.
