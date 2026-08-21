@@ -1,6 +1,5 @@
 .env
 data/
-target_districts.geojson
 gadm41_IND_2.json
 desktop.ini
 __pycache__/
