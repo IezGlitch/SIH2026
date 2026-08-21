@@ -1,0 +1,4 @@
+.env
+data/
+*.json
+gadm41_IND_2.json
