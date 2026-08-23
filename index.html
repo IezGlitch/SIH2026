@@ -609,13 +609,13 @@
                     ),
 
                 hour:
-                    datetime.getHours(),
+    datetime.getUTCHours(),
 
-                day:
-                    datetime.getDate(),
+day:
+    datetime.getUTCDate(),
 
-                month:
-                    datetime.getMonth() + 1
+month:
+    datetime.getUTCMonth() + 1
 
             };
 
@@ -1058,198 +1058,84 @@
 
     async function loadDistricts() {
 
-        try {
+    try {
 
-            const response =
-                await fetch("/weather");
+        const response =
+            await fetch("/districts");
 
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "Could not load districts"
-                );
-
-            }
-
-
-            const result =
-                await response.json();
-
-
-            let records;
-
-
-            if (Array.isArray(result)) {
-
-                records = result;
-
-            }
-
-            else if (
-                result &&
-                Array.isArray(result.data)
-            ) {
-
-                records = result.data;
-
-            }
-
-            else if (
-                result &&
-                Array.isArray(result.results)
-            ) {
-
-                records = result.results;
-
-            }
-
-            else {
-
-                records = [];
-
-            }
-
-
-            const districts = [];
-
-
-            records.forEach(
-                function (item) {
-
-                    const key =
-                        item.district_key ||
-                        item.district_name ||
-                        item.dist_name_area;
-
-
-                    const name =
-                        item.district_name ||
-                        item.dist_name_area ||
-                        item.district_key;
-
-
-                    if (
-                        key &&
-                        name
-                    ) {
-
-                        const exists =
-                            districts.some(
-                                function (d) {
-                                    return d.key === key;
-                                }
-                            );
-
-
-                        if (!exists) {
-
-                            districts.push({
-                                key: key,
-                                name: name
-                            });
-
-                        }
-
-                    }
-
-                }
+        if (!response.ok) {
+            throw new Error(
+                "Could not load districts"
             );
-
-
-            districtSelect.innerHTML = "";
-
-
-            const defaultOption =
-                document.createElement(
-                    "option"
-                );
-
-            defaultOption.value = "";
-
-            defaultOption.textContent =
-                "Select a district";
-
-            districtSelect.appendChild(
-                defaultOption
-            );
-
-
-            districts
-                .sort(
-                    function (a, b) {
-
-                        return a.name.localeCompare(
-                            b.name
-                        );
-
-                    }
-                )
-                .forEach(
-                    function (district) {
-
-                        const option =
-                            document.createElement(
-                                "option"
-                            );
-
-                        option.value =
-                            district.key;
-
-                        option.textContent =
-                            district.name;
-
-                        districtSelect.appendChild(
-                            option
-                        );
-
-                    }
-                );
-
-
-            if (districts.length > 0) {
-
-                districtSelect.value =
-                    districts[0].key;
-
-                await loadWeather(
-                    districts[0].key
-                );
-
-            }
-
-            else {
-
-                document.getElementById(
-                    "status"
-                ).innerText =
-                    "No districts found.";
-
-            }
-
         }
 
+        const districts =
+            await response.json();
 
-        catch (error) {
+        districtSelect.innerHTML = "";
 
-            console.error(
-                "District loading error:",
-                error
+        const defaultOption =
+            document.createElement("option");
+
+        defaultOption.value = "";
+
+        defaultOption.textContent =
+            "Select a district";
+
+        districtSelect.appendChild(
+            defaultOption
+        );
+
+        districts.forEach(
+            function (district) {
+
+                const option =
+                    document.createElement("option");
+
+                option.value =
+                    district.toLowerCase();
+
+                option.textContent =
+                    district;
+
+                districtSelect.appendChild(
+                    option
+                );
+
+            }
+        );
+
+        if (districts.length > 0) {
+
+            districtSelect.value =
+                districts[0].toLowerCase();
+
+            await loadWeather(
+                districts[0].toLowerCase()
             );
-
-
-            districtSelect.innerHTML =
-                '<option value="">Unable to load districts</option>';
-
-
-            document.getElementById(
-                "status"
-            ).innerText =
-                "Failed to load districts ❌";
 
         }
 
     }
+
+    catch (error) {
+
+        console.error(
+            "District loading error:",
+            error
+        );
+
+        districtSelect.innerHTML =
+            '<option value="">Unable to load districts</option>';
+
+        document.getElementById(
+            "status"
+        ).innerText =
+            "Failed to load districts ❌";
+
+    }
+
+}
 
 
     // --------------------------------------------------
