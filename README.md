@@ -1,86 +1,109 @@
-# SIH2026 – Gaya Heatwave LST Analysis
+# SIH2026 – Weather & Flood Risk Dashboard
 
+## Overview
 
+A weather and flood risk monitoring dashboard developed for SIH2026.
 
-## Objective
-- Extract Sentinel-3 LST data for Gaya district
-- Cover heatwave event window: 10–25 May 2026
-- Convert satellite data into readable temperature map
-- Analyze heat risk across the district
+The system combines real weather data, flood-related datasets, derived weather-risk features, and a machine learning model to provide district-wise flood risk information.
 
+## Key Features
 
+- District-wise weather information
+- Latest weather data for each district
+- Weather risk assessment
+- Flood-related statistics
+- Flooded area information
+- Flood event information
+- Population information
+- Machine Learning-based flood prediction
+- ML prediction probability
+- Overall flood/weather risk level
+- Interactive dashboard
 
-## Environment Setup
-- Created `.env` file for CDSE login credentials
-- Added `.gitignore` to keep credentials private
-- Installed required libraries: xarray, netCDF4, rasterio, geopandas, numpy
+## Machine Learning
 
+The project uses a trained machine learning model to predict flood risk.
 
+The model uses the following features:
 
-## Product Identification & Download
-- Searched CDSE for correct Sentinel-3 SLSTR LST product
-- Verified product covers Gaya during heatwave window
-- Downloaded product as `.zip` file
-- Extracted `.SEN3` folder containing:
-  - `LST_in.nc` → temperature values
-  - `geodetic_in.nc` → pixel coordinates
-  - `flags_in.nc` → quality flags
+- Temperature
+- Humidity
+- Rainfall
+- 6-hour rainfall
+- 24-hour rainfall
+- 6-hour average temperature
+- 6-hour average humidity
+- Heat risk
+- Rainfall risk
+- Rainfall intensity
+- Humidity-rain index
+- Flood pressure index
+- Hour
+- Day
+- Month
 
+The model returns:
 
+- Flood prediction
+- Prediction probability
+- Risk level (HIGH / LOW)
 
-## Data Inspection
-- Explored internal structure of LST NetCDF file
-- Confirmed product type, resolution, acquisition time
+## Backend
 
+The backend is built using Flask.
 
+### API Endpoints
 
-## District Boundary Preparation
-- Downloaded GADM Level-2 district boundary data for India
-- Filtered out Gaya, Katihar, Begusarai boundaries
-- Saved as `target_districts.geojson`
+| Endpoint | Method | Description |
+|---|---|---|
+| `/` | GET | Dashboard |
+| `/health` | GET | Backend health check |
+| `/districts` | GET | Returns available districts |
+| `/weather` | GET | Returns latest weather data |
+| `/weather?district=<name>` | GET | Returns latest data for a selected district |
+| `/predict` | POST | Generates ML flood prediction |
 
+## Data Processing Pipeline
 
+The project contains scripts for:
 
-## Gridding & Clipping
-- Converted scattered satellite data into proper grid (GeoTIFF)
-- Clipped raster to exact Gaya district boundary
-- Generated:
-  - `gaya_sentinel3_lst_clipped.tiff` → final LST raster
-  - `gaya_lst_preview.png` → visual preview
+- Weather data downloading
+- Grid weather processing
+- District-wise weather aggregation
+- Flood data processing
+- Weather and flood data merging
+- ML dataset preparation
+- ML model training
 
+## Project Structure
 
-
-## Statistical Analysis
-- Converted temperature from Kelvin to Celsius
-- Calculated min, max, mean LST
-- Classified area into heat categories:
-  - Low (<35°C)
-  - Moderate (35–40°C)
-  - High (40–45°C)
-  - Extreme (>45°C)
-- Generated:
-  - `gaya_heat_risk.tif` → classified heat-risk map
-  - `gaya_lst_statistics.csv` → statistics table
-
-
-
-## Key Findings
-- Min LST: 12.06°C
-- Max LST: 32.63°C
-- Mean LST: 28.02°C
-- 100% area falls under "Low" category
-- Note: data is from a nighttime satellite pass — daytime data needed for true heatwave peak analysis
-
-
-
-## Final Deliverables
-- `gaya_sentinel3_lst_clipped.tiff` — LST raster
-- `gaya_heat_risk.tif` — heat risk map
-- `gaya_lst_preview.png` — visual preview
-- `gaya_lst_statistics.csv` — statistics
-
-
-
-## Tools Used
-- Python, xarray, netCDF4, rasterio, geopandas, numpy
-- Git & GitHub for version control
+```text
+SIH2026/
+│
+├── backend/
+│   └── app.py
+│
+├── data/
+│   └── processed/
+│       └── final_weather_flood_dataset.csv
+│
+├── models/
+│   └── flood_risk_model.pkl
+│
+├── scripts/
+│   ├── aggregate_weather_district.py
+│   ├── build_final_weather_dataset.py
+│   ├── create_weather_features.py
+│   ├── create_weather_grid.py
+│   ├── download_grid_weather.py
+│   ├── download_weather.py
+│   ├── merge_flood_data.py
+│   ├── merge_flood_weather.py
+│   ├── prepare_ml_dataset.py
+│   ├── test_setup.py
+│   └── train_model.py
+│
+├── index.html
+├── requirements.txt
+├── README.md
+└── .gitignore
