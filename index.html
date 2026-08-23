@@ -1,11 +1,519 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Weather Risk Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            opacity: 0.85;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .selector-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .selector-box label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+        }
+
+        #status {
+            text-align: center;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            margin: 0 0 15px;
+            font-size: 18px;
+        }
+
+        .value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .risk {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .prediction {
+            margin-top: 25px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .prediction h2 {
+            margin-top: 0;
+        }
+
+        #floodPrediction {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #probability {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .district-info {
+            margin-top: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .district-info h2 {
+            margin-top: 0;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            .value {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <H1>All Set For Hackathon</H1>
+
+<header>
+    <h1>🌦️ Weather Risk Dashboard</h1>
+    <p>Weather monitoring and flood-risk assessment</p>
+</header>
+
+<div class="container">
+
+    <div class="selector-box">
+
+        <label for="district">
+            Select District
+        </label>
+
+        <select id="district">
+
+            <option value="">
+                Select a district
+            </option>
+
+            <option value="IND.5.10_1">
+                IND.5.10_1
+            </option>
+
+            <option value="IND.5.5_1">
+                IND.5.5_1
+            </option>
+
+            <option value="IND.5.15_1">
+                IND.5.15_1
+            </option>
+
+        </select>
+
+    </div>
+
+    <div id="status">
+        Ready for prediction.
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>🌡️ Temperature</h2>
+            <div class="value" id="temperature">--</div>
+        </div>
+
+        <div class="card">
+            <h2>💧 Humidity</h2>
+            <div class="value" id="humidity">--</div>
+        </div>
+
+        <div class="card">
+            <h2>🌧️ Rainfall (6h)</h2>
+            <div class="value" id="rainfall6">--</div>
+        </div>
+
+        <div class="card">
+            <h2>🌧️ Rainfall (24h)</h2>
+            <div class="value" id="rainfall24">--</div>
+        </div>
+
+        <div class="card">
+            <h2>🔥 Heat Risk</h2>
+            <div class="risk" id="heatRisk">--</div>
+        </div>
+
+        <div class="card">
+            <h2>⚠️ Rainfall Risk</h2>
+            <div class="risk" id="rainfallRisk">--</div>
+        </div>
+
+    </div>
+
+    <div class="prediction">
+
+        <h2>🌊 Flood Risk Prediction</h2>
+
+        <div id="floodPrediction">
+            --
+        </div>
+
+        <div id="probability">
+            Probability: --
+        </div>
+
+    </div>
+
+    <div class="district-info">
+
+        <h2>📍 Selected District</h2>
+
+        <p id="selectedDistrict">
+            No district selected
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const districtSelect =
+        document.getElementById("district");
+
+
+    /*
+     * Sample weather values for testing
+     * the existing /predict API.
+     *
+     * Later these values can be connected
+     * directly to the real weather dataset/API.
+     */
+
+    const weatherData = {
+
+        "IND.5.10_1": {
+            temperature_c: 30,
+            humidity_pct: 75,
+            rainfall_mm: 20,
+            rainfall_6h_mm: 12,
+            rainfall_24h_mm: 35,
+            temperature_6h_avg: 29,
+            humidity_6h_avg: 73,
+            heat_risk: 0,
+            rainfall_risk: 1,
+            rainfall_intensity: 2,
+            humidity_rain_index: 1.5,
+            flood_pressure_index: 2,
+            hour: 12,
+            day: 22,
+            month: 8
+        },
+
+        "IND.5.5_1": {
+            temperature_c: 29,
+            humidity_pct: 80,
+            rainfall_mm: 25,
+            rainfall_6h_mm: 15,
+            rainfall_24h_mm: 40,
+            temperature_6h_avg: 28,
+            humidity_6h_avg: 78,
+            heat_risk: 0,
+            rainfall_risk: 1,
+            rainfall_intensity: 2.5,
+            humidity_rain_index: 1.8,
+            flood_pressure_index: 2.5,
+            hour: 12,
+            day: 22,
+            month: 8
+        },
+
+        "IND.5.15_1": {
+            temperature_c: 31,
+            humidity_pct: 70,
+            rainfall_mm: 10,
+            rainfall_6h_mm: 5,
+            rainfall_24h_mm: 18,
+            temperature_6h_avg: 30,
+            humidity_6h_avg: 69,
+            heat_risk: 1,
+            rainfall_risk: 0,
+            rainfall_intensity: 1,
+            humidity_rain_index: 0.8,
+            flood_pressure_index: 1,
+            hour: 12,
+            day: 22,
+            month: 8
+        }
+
+    };
+
+
+    async function predictFlood(weather) {
+
+        try {
+
+            document.getElementById("status").innerText =
+                "Running flood-risk prediction...";
+
+
+            const response =
+                await fetch("/predict", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify(weather)
+
+                });
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.error || "Prediction failed"
+                );
+
+            }
+
+
+            console.log(
+                "ML FLOOD PREDICTION:",
+                result
+            );
+
+
+            if (result.risk_level === "HIGH") {
+
+                document.getElementById(
+                    "floodPrediction"
+                ).innerText = "HIGH RISK ⚠️";
+
+            } else {
+
+                document.getElementById(
+                    "floodPrediction"
+                ).innerText = "LOW RISK ✅";
+
+            }
+
+
+            if (
+                result.probability !== undefined
+            ) {
+
+                document.getElementById(
+                    "probability"
+                ).innerText =
+                    "Probability: " +
+                    (result.probability * 100).toFixed(1) +
+                    "%";
+
+            } else {
+
+                document.getElementById(
+                    "probability"
+                ).innerText =
+                    "Probability: Not available";
+
+            }
+
+
+            document.getElementById(
+                "status"
+            ).innerText =
+                "Prediction completed successfully ✅";
+
+
+        } catch (error) {
+
+            console.error(
+                "Prediction error:",
+                error
+            );
+
+
+            document.getElementById(
+                "status"
+            ).innerText =
+                "Prediction failed ❌";
+
+
+            document.getElementById(
+                "floodPrediction"
+            ).innerText =
+                "--";
+
+        }
+
+    }
+
+
+    function loadWeather(district) {
+
+        if (!district) {
+
+            document.getElementById(
+                "status"
+            ).innerText =
+                "Please select a district.";
+
+            return;
+
+        }
+
+
+        const weather =
+            weatherData[district];
+
+
+        if (!weather) {
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "temperature"
+        ).innerText =
+            weather.temperature_c + " °C";
+
+
+        document.getElementById(
+            "humidity"
+        ).innerText =
+            weather.humidity_pct + " %";
+
+
+        document.getElementById(
+            "rainfall6"
+        ).innerText =
+            weather.rainfall_6h_mm + " mm";
+
+
+        document.getElementById(
+            "rainfall24"
+        ).innerText =
+            weather.rainfall_24h_mm + " mm";
+
+
+        document.getElementById(
+            "heatRisk"
+        ).innerText =
+            weather.heat_risk
+                ? "HIGH"
+                : "LOW";
+
+
+        document.getElementById(
+            "rainfallRisk"
+        ).innerText =
+            weather.rainfall_risk
+                ? "HIGH"
+                : "LOW";
+
+
+        document.getElementById(
+            "selectedDistrict"
+        ).innerText =
+            district;
+
+
+        predictFlood(weather);
+
+    }
+
+
+    districtSelect.addEventListener(
+        "change",
+        function () {
+
+            loadWeather(this.value);
+
+        }
+    );
+
+</script>
+
 </body>
 </html>

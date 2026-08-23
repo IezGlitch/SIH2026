@@ -33,13 +33,13 @@ districts = districts.to_crs("EPSG:4326")
 # Spatial join: assign each weather point to a district
 joined = gpd.sjoin(
     weather_gdf,
-    districts[["NAME_2", "geometry"]],
+    districts[["GID_2", "geometry"]],
     how="left",
     predicate="within"
 )
 
 # Rename district column
-joined = joined.rename(columns={"NAME_2": "district"})
+joined = joined.rename(columns={"GID_2": "district"})
 
 # Remove geometry/index columns
 joined = joined.drop(

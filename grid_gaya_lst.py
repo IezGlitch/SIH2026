@@ -4,8 +4,8 @@ import geopandas as gpd
 import rasterio
 from rasterio.transform import from_bounds
 from scipy.interpolate import griddata
-
-base = r"data\Gaya\gaya_sentinel3_lst_20260524\S3A_SL_2_LST____20260524T154613_20260524T154913_20260526T053838_0179_139_368_0360_PS1_O_NT_005.SEN3"
+from pathlib import Path
+base = next(Path("data/Gaya/gaya_sentinel3_lst").glob("*.SEN3"))
 
 lst_ds = xr.open_dataset(f"{base}\\LST_in.nc")
 geo_ds = xr.open_dataset(f"{base}\\geodetic_in.nc")
